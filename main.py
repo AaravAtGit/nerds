@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from twilio.rest import Client
 from dotenv import load_dotenv
+from uvicorn import run
 import os
 
 app = FastAPI()
@@ -56,3 +57,6 @@ _We look forward to serving you!_ 🚗"""
         return {"success": True, "sid": message.sid}
     except Exception as e:
         return {"success": False, "error": str(e)}
+
+
+         

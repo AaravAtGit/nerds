@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from twilio.rest import Client
 from dotenv import load_dotenv
@@ -9,6 +10,15 @@ from email.message import EmailMessage
 
 app = FastAPI()
 load_dotenv()
+
+# Enable CORS for all origins (adjust allow_origins in production)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 sender_mail = "toursandtravels987@gmail.com"
 reciver_mail = "mishraji3713@gmail.com"
@@ -84,7 +94,7 @@ _We look forward to serving you!_ 🚗"""
         message = client.messages.create(
             body=message,
             from_=number,
-            to=f"whatsapp:{booking.phone}"
+            to=f"whatsapp:+917452820984"
         )
         # notify admin via email
         email_ok, email_err = send_booking_mail(booking)
